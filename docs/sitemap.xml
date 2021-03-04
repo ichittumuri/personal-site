@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/about.html</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/contributors.html</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/gallery.html</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/posts/notes/</loc>
+    <lastmod>2021-03-03T21:11:05-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing-asset-returns/</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/posts/2017-09-13-asset-volatility/</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/posts/2017-03-07-quandl-and-forecasting/</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/posts/2016-11-08-sharpe-ratio/</loc>
+    <lastmod>2021-03-03T20:54:00-05:00</lastmod>
+  </url>
+</urlset>

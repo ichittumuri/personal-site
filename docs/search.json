@@ -1,0 +1,33 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this blog",
+      "author": [],
+      "contents": "\nWelcome to the Reproducible Finance with R blog.\nFinancial applications were an early driving force behind the adoption of the R language, but as data science becomes increasingly critical to banks, hedge funds, investment managers, data providers, exchanges, etc., R is becoming even more important to Finance. We are excited and inspired by what the future holds in the brave new world of data-driven financial institutions.\nWe hope that Reproducible Finance with R will attract other voices from around the R Community. If you have something to say on a finance related topic, news, commentary, or an example of using R in finance that you would like to share with the R Community, please email your ideas to jonathan.regenstein@rstudio.com.\nWe welcome comments from all readers and encourage discussion. However, comments will not be moderated. Please be courteous and civil.\n\n\n\n",
+      "last_modified": "2021-03-03T21:17:06-05:00"
+    },
+    {
+      "path": "contributors.html",
+      "title": "Contributors",
+      "author": [],
+      "contents": "\nBelow is a list of contributors to this blog.\nName\nBio\nJonathan Regenstein\nJonathan studied International Relations as an undergraduate at Harvard, worked in finance at JP Morgan and then did graduate work in Political Economy at Emory University before joining RStudio..\nEdgar Ruiz\nEdgar has a background in deploying enterprise reporting and business intelligence solutions. He is the author of multiple articles and blog posts sharing analytics insights and server infrastructure for data science. Recently, Edgar authored the “Data Science on Spark using sparklyr” cheat sheet.\n\n\n\n",
+      "last_modified": "2021-03-03T21:17:09-05:00"
+    },
+    {
+      "path": "gallery.html",
+      "title": "Gallery of featured posts",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-03-03T21:17:10-05:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Reproducible Finance with R",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-03-03T21:17:11-05:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}

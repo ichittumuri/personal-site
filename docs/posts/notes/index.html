@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Reproducible Finance with R: Class 01 - Ordinary Linear Regression</title>
+
+<meta property="description" itemprop="description" content=""/>
+
+<link rel="canonical" href="https://beta.rstudioconnect.com/content/3776/posts/notes/"/>
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+<link rel="icon" type="image/png" href="../../images/favicon.png"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2021-03-03"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-03-03"/>
+<meta name="article:author" content="Isabella Chittumuri"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Reproducible Finance with R: Class 01 - Ordinary Linear Regression"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content=""/>
+<meta property="og:url" content="https://beta.rstudioconnect.com/content/3776/posts/notes/"/>
+<meta property="og:image" content="https://beta.rstudioconnect.com/content/3776/posts/notes/resources/lter_penguins.png"/>
+<meta property="og:image:width" content="1800"/>
+<meta property="og:image:height" content="1074"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Reproducible Finance with R"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Reproducible Finance with R: Class 01 - Ordinary Linear Regression"/>
+<meta property="twitter:description" content=""/>
+<meta property="twitter:url" content="https://beta.rstudioconnect.com/content/3776/posts/notes/"/>
+<meta property="twitter:image" content="https://beta.rstudioconnect.com/content/3776/posts/notes/resources/lter_penguins.png"/>
+<meta property="twitter:image:width" content="1800"/>
+<meta property="twitter:image:height" content="1074"/>
+
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="Reproducible Finance with R: Class 01 - Ordinary Linear Regression"/>
+<meta name="citation_fulltext_html_url" content="https://beta.rstudioconnect.com/content/3776/posts/notes/"/>
+<meta name="citation_fulltext_world_readable" content=""/>
+<meta name="citation_online_date" content="2021/03/03"/>
+<meta name="citation_publication_date" content="2021/03/03"/>
+<meta name="citation_author" content="Isabella Chittumuri"/>
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","author","description","output","date","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Class 01 - Ordinary Linear Regression"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Isabella Chittumuri"]}]}]},{"type":"character","attributes":{},"value":[""]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["03-03-2021"]},{"type":"character","attributes":{},"value":["https://beta.rstudioconnect.com/content/3776/posts/notes/"]},{"type":"character","attributes":{},"value":["https://beta.rstudioconnect.com/content/3776/posts/notes/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-11-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-13-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-16-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-19-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-23-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-28-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-4-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-5-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-6-1.png","Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-9-1.png","resources/Class 02  - mm inverse.png","resources/Class 02 - matrix multiplication.png","resources/Class 02 - matrix props.png","resources/Class 02 - mm est y.png","resources/Class 02 - mm regression.png","resources/Class 02 - mm varcov.png","resources/Class 05 - quasi-score.png","resources/class 12 - cns.png","resources/class-12-prop-odds.png","resources/class-13-binomial.png","resources/class-13-canonical.png","resources/class-13-normal.png","resources/lter_penguins.png","resources/Thumbs.db"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.7/header-attrs.js"></script>
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<script type="text/javascript" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-77306155-2"></script>
+<script type="text/javascript" cookie-consent="tracking">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-77306155-2');
+</script>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Class 01 - Ordinary Linear Regression","description":"","authors":[{"author":"Isabella Chittumuri","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-03-03T00:00:00.000+00:00","citationText":"Chittumuri, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<span class="logo">
+<img src="../../images/rstudio.png"/>
+</span>
+<a href="../../index.html" class="title">Reproducible Finance with R</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../gallery.html">Gallery</a>
+<a href="../../about.html">About</a>
+<a href="../../contributors.html">Contributors</a>
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Class 01 - Ordinary Linear Regression</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+
+</div>
+
+<div class="d-byline">
+  
+  Isabella Chittumuri
+  
+<br/>03-03-2021
+</div>
+
+<div class="d-article">
+<p>To get the markdown (```{r}), you do command alt I. To get (%&gt;%), you do command shift M.<br />
+To undo, you press command Z. To run a code, you press alt enter. To run the entria chunck, press command alt N.</p>
+<h1 id="setting-the-stage">Setting the stage</h1>
+<h2 id="dataset">Dataset</h2>
+<p>We will use the <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a> dataset to demonstrate.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/printr/'>printr</a></span><span class='op'>)</span> <span class='co'># helps automatically print nice tables in presentation</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># automatically set a simpler ggplot2 theme for all graphics</span>
+<span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>'resources/lter_penguins.png'</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="resources/lter_penguins.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<p><font size = "3"> artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span> </font></p>
+<h2 id="lets-explore">Let’s explore</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>penguins</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">island</th>
+<th style="text-align: left;">bill_length_mm</th>
+<th style="text-align: left;">bill_depth_mm</th>
+<th style="text-align: left;">flipper_length_mm</th>
+<th style="text-align: left;">body_mass_g</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Adelie :152</td>
+<td style="text-align: left;">Biscoe :168</td>
+<td style="text-align: left;">Min. :32.10</td>
+<td style="text-align: left;">Min. :13.10</td>
+<td style="text-align: left;">Min. :172.0</td>
+<td style="text-align: left;">Min. :2700</td>
+<td style="text-align: left;">female:165</td>
+<td style="text-align: left;">Min. :2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Chinstrap: 68</td>
+<td style="text-align: left;">Dream :124</td>
+<td style="text-align: left;">1st Qu.:39.23</td>
+<td style="text-align: left;">1st Qu.:15.60</td>
+<td style="text-align: left;">1st Qu.:190.0</td>
+<td style="text-align: left;">1st Qu.:3550</td>
+<td style="text-align: left;">male :168</td>
+<td style="text-align: left;">1st Qu.:2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Gentoo :124</td>
+<td style="text-align: left;">Torgersen: 52</td>
+<td style="text-align: left;">Median :44.45</td>
+<td style="text-align: left;">Median :17.30</td>
+<td style="text-align: left;">Median :197.0</td>
+<td style="text-align: left;">Median :4050</td>
+<td style="text-align: left;">NA’s : 11</td>
+<td style="text-align: left;">Median :2008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Mean :43.92</td>
+<td style="text-align: left;">Mean :17.15</td>
+<td style="text-align: left;">Mean :200.9</td>
+<td style="text-align: left;">Mean :4202</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Mean :2008</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">3rd Qu.:48.50</td>
+<td style="text-align: left;">3rd Qu.:18.70</td>
+<td style="text-align: left;">3rd Qu.:213.0</td>
+<td style="text-align: left;">3rd Qu.:4750</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">3rd Qu.:2009</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Max. :59.60</td>
+<td style="text-align: left;">Max. :21.50</td>
+<td style="text-align: left;">Max. :231.0</td>
+<td style="text-align: left;">Max. :6300</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Max. :2009</td>
+</tr>
+</tbody>
+</table>
+| |NA |NA |NA’s :2 |NA’s :2 |NA’s :2 |NA’s :2 |NA |NA |
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>peng</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/stats/complete.cases.html'>complete.cases</a></span><span class='op'>(</span><span class='va'>penguins</span><span class='op'>)</span>, <span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># `include = FALSE` means that the code will run but </span>
+<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>flipper_length_mm</span> <span class='op'>~</span> <span class='va'>body_mass_g</span>, data <span class='op'>=</span> <span class='va'>peng</span><span class='op'>)</span>
+<span class='va'>intercept</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>slope</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<h2 id="define-a-relationship">Define a relationship</h2>
+<p><em>Y = <code>body_mass_g</code></em></p>
+<p><em>X = <code>flipper_length_mm</code></em></p>
+<ul>
+<li>We are going to say body mass is a function of flipper length directly, following the equation:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+Y &amp;= f(X) \\
+Y &amp;= \beta_0 + \beta_1X \\
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Using these numbers:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\beta_0 &amp;= 137, \beta_1 = .015 \\
+Y &amp;= 137 + .015X
+\end{aligned}
+\]</span></p>
+<h2 id="define-a-relationship---plot">Define a relationship - Plot</h2>
+<ul>
+<li>If that’s that case, then we’re going to be able to plot some data and look at the relationship between the two.</li>
+</ul>
+<h2 id="make-a-new-data-frame">Make a new data frame:</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># A sequence of 400 evenly spaced out numbers between the min and max.</span>
+<span class='va'>sim_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>body_mass_g <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fl'>2700</span>, to <span class='op'>=</span> <span class='fl'>6300</span>, length.out <span class='op'>=</span> <span class='fl'>400</span><span class='op'>)</span><span class='op'>)</span> 
+
+<span class='co'># Add a new column, where you input the y = equation from above^</span>
+<span class='va'>sim_data</span><span class='op'>$</span><span class='va'>flipper_length_mm</span> <span class='op'>&lt;-</span> <span class='fl'>137</span> <span class='op'>+</span> <span class='va'>sim_data</span><span class='op'>$</span><span class='va'>body_mass_g</span> <span class='op'>*</span> <span class='fl'>.015</span>
+
+<span class='co'># Create a graph</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>sim_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>body_mass_g</span>, y <span class='op'>=</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-4-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="interpretation">Interpretation</h2>
+<ul>
+<li>For every unit of X, how much does Y change?</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\beta_0 &amp;= 137, \beta_1 = .015 \\
+Y &amp;= 137 + .015X
+\end{aligned}
+\]</span></p>
+<p>What does <span class="math inline">\(\beta_0\)</span>, X, and <span class="math inline">\(\beta_1\)</span> represent?</p>
+<ul>
+<li><p><span class="math inline">\(beta_0\)</span> is the intercept and the value when X is zero. Meaning when the mass of a penguin is zero, its flippers are length 137. This is not practical because there is no such thing as a mass-less penguin.</p></li>
+<li><p>X is the body mass</p></li>
+<li><p><span class="math inline">\(beta_1\)</span> is the slope of the line, or rate of change. Meaning for every gram that a penguin gets larger, we expect that the length of the flipper will go up by .015mm. Those measurements are a little hard to interpret so we can multiply those values by 1000. (015*1000=15) We can say for every kg (which is 1000g), that a penguin becomes larger, their flipper is 15mm longer.</p></li>
+</ul>
+<p>What are we missing?</p>
+<ul>
+<li>In reality, this is not a prefect relationship. The data does not follow the fitted line perfectly. There is a limit to how big or long a penguin can be.</li>
+</ul>
+<p>Note:</p>
+<ul>
+<li>A statistical relation, unlike a functional relation, is not a perfect one. In general, the observations for a statistical relation do not follow directly on-the curve of relationship.</li>
+</ul>
+<h2 id="overlay-the-actual-data">Overlay the actual data</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Overlay the actual data with the fitted line</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>sim_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>body_mass_g</span>, y <span class='op'>=</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"fitted line"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>peng</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"observed data"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"observed data"</span> <span class='op'>=</span>  <span class='st'>"#9ebcda"</span>,
+                                <span class='st'>"fitted line"</span> <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>, name <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-5-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ul>
+<li>In this plot, you can see that the actual data points don’t perfectly match the fitted line of the linear model. The data looks like it doesn’t fit as well on the top right side.</li>
+</ul>
+<h2 id="how-do-we-model-the-data-generating-process">How do we model the data generating process?</h2>
+<p>How can we better mimic the data that we see?</p>
+<ul>
+<li>We can add random noise.</li>
+</ul>
+<p>What kind of random noise can we add?</p>
+<ul>
+<li>We want the noise to have an average of zero, constant and symmetric in width throughout the line.</li>
+</ul>
+<p>What can we say about the random noise?</p>
+<ul>
+<li>In this case, we’re going to add random gaussian noise</li>
+<li>That is not a necessary assumption for what we’re going to start with which is least squares estimation.</li>
+</ul>
+<h2 id="different-types-of-noise">Different types of noise</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Gaussian distribution (normal distribution)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span>, mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># T-distribution</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/TDist.html'>rt</a></span><span class='op'>(</span><span class='fl'>1000</span>, df <span class='op'>=</span> <span class='fl'>10000</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Uniform distribution</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>1000</span>, min <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>, max <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Poisson distribution (has a mean of 30 so we subtract it)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Poisson.html'>rpois</a></span><span class='op'>(</span><span class='fl'>1000</span>, lambda <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>30</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-6-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="different-distributions-in-r">Different distributions in R</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># List of different distributions</span>
+<span class='op'>?</span><span class='va'>distribution</span>
+</code></pre>
+</div>
+<pre><code>Distributions in the stats package
+
+Description:
+
+     Density, cumulative distribution function, quantile function and
+     random variate generation for many standard probability
+     distributions are available in the &#39;stats&#39; package.
+
+Details:
+
+     The functions for the density/mass function, cumulative
+     distribution function, quantile function and random variate
+     generation are named in the form &#39;dxxx&#39;, &#39;pxxx&#39;, &#39;qxxx&#39; and &#39;rxxx&#39;
+     respectively.
+
+     For the beta distribution see &#39;dbeta&#39;.
+
+     For the binomial (including Bernoulli) distribution see &#39;dbinom&#39;.
+
+     For the Cauchy distribution see &#39;dcauchy&#39;.
+
+     For the chi-squared distribution see &#39;dchisq&#39;.
+
+     For the exponential distribution see &#39;dexp&#39;.
+
+     For the F distribution see &#39;df&#39;.
+
+     For the gamma distribution see &#39;dgamma&#39;.
+
+     For the geometric distribution see &#39;dgeom&#39;.  (This is also a
+     special case of the negative binomial.)
+
+     For the hypergeometric distribution see &#39;dhyper&#39;.
+
+     For the log-normal distribution see &#39;dlnorm&#39;.
+
+     For the multinomial distribution see &#39;dmultinom&#39;.
+
+     For the negative binomial distribution see &#39;dnbinom&#39;.
+
+     For the normal distribution see &#39;dnorm&#39;.
+
+     For the Poisson distribution see &#39;dpois&#39;.
+
+     For the Student&#39;s t distribution see &#39;dt&#39;.
+
+     For the uniform distribution see &#39;dunif&#39;.
+
+     For the Weibull distribution see &#39;dweibull&#39;.
+
+     For less common distributions of test statistics see &#39;pbirthday&#39;,
+     &#39;dsignrank&#39;, &#39;ptukey&#39; and &#39;dwilcox&#39; (and see the &#39;See Also&#39;
+     section of &#39;cor.test&#39;).
+
+See Also:
+
+     &#39;RNG&#39; about random number generation in R.
+
+     The CRAN task view on distributions, &lt;URL:
+     https://CRAN.R-project.org/view=Distributions&gt;, mentioning several
+     CRAN packages for additional distributions.</code></pre>
+</div>
+<h2 id="add-random-noise-to-the-data">Add random noise to the data</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Take flipper length, add data with mean 0 &amp; standard deviation 6.8</span>
+<span class='va'>sim_data</span><span class='op'>$</span><span class='va'>flipper_length_mm_w_noise</span> <span class='op'>&lt;-</span> 
+  <span class='va'>sim_data</span><span class='op'>$</span><span class='va'>flipper_length_mm</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>sim_data</span><span class='op'>)</span>, mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>6.8</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<ul>
+<li>Created data follows normal distribution, with a standard deviation of 6.8 instead of 1.</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Graph the noise we just made</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>sim_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>body_mass_g</span>, y <span class='op'>=</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"fitted line"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>peng</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"observed data"</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"observed data"</span> <span class='op'>=</span>  <span class='st'>"#9ebcda"</span>,
+                                <span class='st'>"fitted line"</span> <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>, name <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>flipper_length_mm_w_noise</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-9-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ul>
+<li><p>By adding noise, we were able to graph the black dots above. Even though towards the end it doesn’t look the same, we can see that it even similar to the observed data (light blue dots).</p></li>
+<li><p>Remember that the original data didn’t fit well on the right side. Maybe as researchers, depending on what we’re looking for, we care more about the inferences about data on the right side, this wouldn’t be the best model. Or maybe we care more about the inferences about data on the left side, then the model is a good fit.</p></li>
+<li><p>One of the things that we are assuming is that the observations are not correlated with each other. The observations are independent.</p></li>
+<li><p>A way that the observations can be dependent is that if you only went to one cluster of penguins that were the dominant group and they happen to be the big ones. Another way for them to be dependent is that off springs of certain penguins are going to be affected by their parents genetics. Another is what if you don’t tag the penguins you already looked at and end up looking at the same one again. There are certainly correlations between them in these cases. Also tech errors</p></li>
+</ul>
+<h2 id="formal-statement-of-model">Formal Statement of Model</h2>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1X_i + \epsilon_i
+\]</span></p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span> is the value of the response variable in the <span class="math inline">\(i\)</span>th observation, in this case its flipper length</li>
+<li><span class="math inline">\(\beta\)</span>s are the parameters; <span class="math inline">\(beta_0, beta_1\)</span> are somethings we are trying to estimate.</li>
+<li><span class="math inline">\(X_i\)</span> is a known constant, in this case body mass</li>
+<li><span class="math inline">\(\epsilon_i\)</span> is a random error term with <span class="math inline">\(E\{\epsilon_i\} = 0\)</span>, <span class="math inline">\(Var\{\epsilon_i\} = \sigma^2\)</span>. So the variance is constant and expected value of the error is zero. <span class="math inline">\(\sigma\{\epsilon_i, \epsilon_j\} = 0\)</span> for all <span class="math inline">\(i, j; i \neq j\)</span>, meaning that the correlation between different error values is zero for all points</li>
+</ul>
+<h2 id="features-of-model">Features of Model</h2>
+<ul>
+<li>Since <span class="math inline">\(E\{\epsilon_i\} = 0\)</span> we can show that <span class="math inline">\(E\{Y_i\} = \beta_0 + \beta_1X_i\)</span></li>
+<li>Similarly <span class="math inline">\(\sigma^2\{Y_i\} = \sigma^2\)</span></li>
+<li>Because error terms are uncorrelated - Y’s are uncorrelated</li>
+</ul>
+<h2 id="interpretation-and-alternative-form">Interpretation and Alternative Form</h2>
+<p>We can rewrite the equation so that the <span class="math inline">\(X_i\)</span> term is centered by subtracting <span class="math inline">\(\bar{X}\)</span></p>
+<ul>
+<li>This doesn’t change <span class="math inline">\(\beta_1\)</span> at all, but <span class="math inline">\(\beta_0\)</span> is slightly different.</li>
+<li>Recall what <span class="math inline">\(\beta_0\)</span> generally represents in this example</li>
+<li>We can rewrite so that:</li>
+</ul>
+<p><span class="math display">\[
+Y_i = \beta_0^* + \beta_1(X_i - \bar{X}) + \epsilon_i
+\]</span></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Min.</th>
+<th style="text-align: right;">1st Qu.</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">3rd Qu.</th>
+<th style="text-align: right;">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2700</td>
+<td style="text-align: right;">3550</td>
+<td style="text-align: right;">4050</td>
+<td style="text-align: right;">4207.057</td>
+<td style="text-align: right;">4775</td>
+<td style="text-align: right;">6300</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>In this case, <span class="math inline">\(\bar{X}\)</span> is 4207. We can subtract that from each value of X and re-run the regression. By doing this <span class="math inline">\(\beta_0^*\)</span> goes by <span class="math inline">\(\bar{X} * beta_1\)</span>.</li>
+<li>When will <span class="math inline">\(Y_i = beta_0\)</span>? When <span class="math inline">\(X_i\)</span> equals to the mean, which will make <span class="math inline">\(beta_1 = 0\)</span>. Now instead of the intercept being the equivalent of a zero mass penguin, it will now be an average penguin.</li>
+</ul>
+<h1 id="estimating-the-parameters">Estimating the parameters</h1>
+<h2 id="how-do-we-know-which-line-is-better">How do we know which line is better?</h2>
+<ul>
+<li>Equal number of data points of each side of the line.</li>
+</ul>
+<h2 id="method-of-least-squares">Method of Least Squares</h2>
+<ul>
+<li>We want to minimize <span class="math inline">\(Q\)</span> where:</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>penguins</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>body_mass_g</span>, y <span class='op'>=</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"observed data"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#fb9a99"</span>, intercept <span class='op'>=</span> <span class='fl'>137</span>, slope <span class='op'>=</span> <span class='fl'>0.015</span>, show.legend <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span>intercept <span class='op'>=</span> <span class='fl'>90</span>, slope <span class='op'>=</span> <span class='fl'>0.025</span>, color <span class='op'>=</span> <span class='st'>"#33a02c"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"observed data"</span> <span class='op'>=</span>  <span class='st'>"#9ebcda"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Which line fits better?"</span>, color <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-11-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="method-of-least-squares-1">Method of Least Squares</h2>
+<ul>
+<li>We want to minimize <span class="math inline">\(Q\)</span> where:</li>
+</ul>
+<p><span class="math display">\[
+Q = \sum^n_{i=1}{(Y_i - \beta_0 - \beta_1X_i)^2}
+\]</span> - Q is our least squares value</p>
+<ul>
+<li><p>Our estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> will be <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span>, respectively.</p></li>
+<li><p>We are squaring it to avoid getting zero when we are above and below the line</p></li>
+<li><p>This could pose a problem because if you have a point that’s very far from your line or center of data it could influence the fitting of the line.</p></li>
+</ul>
+<h2 id="method-of-least-squares-visual">Method of Least Squares: Visual</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>202008</span><span class='op'>)</span>
+
+<span class='va'>d_least_squares</span> <span class='op'>&lt;-</span> <span class='va'>penguins</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>line1 <span class='op'>=</span> <span class='fl'>137</span> <span class='op'>+</span> <span class='fl'>.015</span><span class='op'>*</span><span class='va'>body_mass_g</span>,
+         line2 <span class='op'>=</span> <span class='fl'>90</span> <span class='op'>+</span> <span class='fl'>.025</span><span class='op'>*</span><span class='va'>body_mass_g</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/sample_n.html'>sample_n</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>body_mass_g</span>, <span class='va'>flipper_length_mm</span>, <span class='va'>line1</span>, <span class='va'>line2</span><span class='op'>)</span>
+
+<span class='va'>d_least_squares</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>flipper_length_mm</span>, color <span class='op'>=</span> <span class='st'>"observed data"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>line1</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#fb9a99"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_linerange</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>line1</span>, ymax <span class='op'>=</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#fb9a99"</span>, linetype <span class='op'>=</span> <span class='st'>"longdash"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>line2</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#33a02c"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_abline</a></span><span class='op'>(</span>intercept <span class='op'>=</span> <span class='fl'>90</span>, slope <span class='op'>=</span> <span class='fl'>0.025</span>, color <span class='op'>=</span> <span class='st'>"#33a02c"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"observed data"</span> <span class='op'>=</span>  <span class='st'>"#9ebcda"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-13-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="calculate-q-definitions">Calculate <em>Q</em> | Definitions</h2>
+<ul>
+<li>Line1: <span class="math inline">\(Y = 137 + .015X\)</span></li>
+<li>Line2: <span class="math inline">\(Y = 90 + .025X\)</span></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>d_least_squares</span>
+</code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">body_mass_g</th>
+<th style="text-align: right;">flipper_length_mm</th>
+<th style="text-align: right;">line1</th>
+<th style="text-align: right;">line2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3200</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">185.00</td>
+<td style="text-align: right;">170.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3600</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">191.00</td>
+<td style="text-align: right;">180.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5500</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">219.50</td>
+<td style="text-align: right;">227.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5450</td>
+<td style="text-align: right;">221</td>
+<td style="text-align: right;">218.75</td>
+<td style="text-align: right;">226.25</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="calculate-q-definitions-1">Calculate <em>Q</em> | Definitions</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Caluse the sum of the squared differences</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>d_least_squares</span>, <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>line1</span> <span class='op'>-</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 109.3125</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>d_least_squares</span>, <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>line2</span> <span class='op'>-</span> <span class='va'>flipper_length_mm</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 389.8125</code></pre>
+</div>
+<ul>
+<li>This means that according to this definition that line 1 fits better.</li>
+</ul>
+<h2 id="how-do-you-solve-for-best-hatbeta_0-and-hatbeta_1">How do you solve for best <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span>?</h2>
+<p>Numerical Search</p>
+<ul>
+<li>One way is to try a bunch of different values for <span class="math inline">\(beta_0 and beta_1\)</span> and find the one with the lowest Q. The darker the value, the lower Q is.</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>all_params</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>
+  b0 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>500</span>, <span class='fl'>500</span>, length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,
+  b1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>.125</span>, <span class='fl'>.125</span>, length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='va'>calculate_q</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>b0</span>, <span class='va'>b1</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>raw_diff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>peng</span>, <span class='va'>flipper_length_mm</span> <span class='op'>-</span> <span class='op'>(</span><span class='va'>b0</span> <span class='op'>+</span> <span class='va'>b1</span><span class='op'>*</span><span class='va'>body_mass_g</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>Q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>raw_diff</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+  <span class='va'>Q</span>
+<span class='op'>}</span>
+
+<span class='va'>all_params</span><span class='op'>$</span><span class='va'>Q</span> <span class='op'>&lt;-</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>pmap_dbl</a></span><span class='op'>(</span><span class='va'>all_params</span>, <span class='va'>calculate_q</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>all_params</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>b0</span>, y <span class='op'>=</span> <span class='va'>b1</span>, fill <span class='op'>=</span> <span class='va'>Q</span>,color <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_gradient.html'>scale_fill_gradient</a></span><span class='op'>(</span>trans <span class='op'>=</span> <span class='st'>"log"</span>, <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>137</span>, y <span class='op'>=</span> <span class='fl'>.015</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"white"</span>, shape <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Numerical Search for lowest Q"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-16-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="what-are-problems-with-this-approach">What are problems with this approach?</h2>
+<ul>
+<li>The problem with this approach is that it’s too slow with lots of parameters (although there are plenty of functions that optimize more efficiently like <code>optim</code>).</li>
+</ul>
+<h2 id="how-do-you-solve-for-best-hatbeta_0-and-hatbeta_1-1">How do you solve for best <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span>?</h2>
+<p>Analytic Approach</p>
+<p><span class="math display">\[
+\hat\beta_1 = \frac{\sum{(X_i - \bar{X})(Y_i - \bar{Y})}}{\sum{(X_i - \bar{X})^2}}
+\]</span></p>
+<p><span class="math display">\[
+\hat\beta_0 = ???
+\]</span> - <span class="math inline">\(\hat\beta_0 = \bar{Y} - \hat\beta_1\bar{X}\)</span></p>
+<p>What happens to that equation when we center <span class="math inline">\(X\)</span>?</p>
+<ul>
+<li>All the <span class="math inline">\(\bar{X}\)</span>s become zero. Because if we center the X, that means we subtracted the mean. By doing that, their new mean is zero. And so <span class="math inline">\(beta_0\)</span> becomes <span class="math inline">\(\bar{Y}\)</span></li>
+</ul>
+<p>What happens if we get more data points?</p>
+<ul>
+<li>Can you predict if <span class="math inline">\(beta_0 and beta_1\)</span> will change, will they get bigger or smaller? We don’t know how the parameters will change</li>
+</ul>
+<h2 id="solve-for-hatbeta_1-and-hatbeta_0">Solve for <span class="math inline">\(\hat{\beta_1}\)</span> and <span class="math inline">\(\hat{\beta_0}\)</span></h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x_bar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span><span class='op'>)</span>
+<span class='va'>y_bar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>flipper_length_mm</span><span class='op'>)</span>
+
+<span class='co'># Using the Analytic Approach</span>
+<span class='va'>beta_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span> <span class='op'>-</span> <span class='va'>x_bar</span><span class='op'>)</span><span class='op'>*</span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>flipper_length_mm</span> <span class='op'>-</span> <span class='va'>y_bar</span><span class='op'>)</span><span class='op'>)</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span> <span class='op'>-</span> <span class='va'>x_bar</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>beta_0</span> <span class='op'>&lt;-</span> <span class='va'>y_bar</span> <span class='op'>-</span> <span class='va'>beta_1</span><span class='op'>*</span><span class='va'>x_bar</span>
+
+<span class='va'>beta_0</span>
+</code></pre>
+</div>
+<pre><code>[1] 137.0396</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>beta_1</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.01519526</code></pre>
+</div>
+<h2 id="point-estimation">Point Estimation</h2>
+<ul>
+<li>If I have a penguin that is 3K, how long do I expect that penguin’s flipper to be?</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>beta_0</span> <span class='op'>+</span> <span class='va'>beta_1</span><span class='op'>*</span><span class='fl'>3000</span>
+</code></pre>
+</div>
+<pre><code>[1] 182.6254</code></pre>
+</div>
+<h2 id="residuals">Residuals</h2>
+<p><span class="math inline">\(e_i = Y_i - \hat{Y_i} = Y_i - (\hat\beta_0 + \hat\beta_1X_i)\)</span></p>
+<ul>
+<li><p>A residual is the difference between the observed value of Y and the estimated value of Y (<span class="math inline">\(\hat{Y_i}\)</span>)</p></li>
+<li><p>This is related to Q: Q is the sum of the residuals squared.</p></li>
+<li><p>The residual is the distance between the point of the line.</p></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>residuals</span> <span class='op'>&lt;-</span> <span class='va'>peng</span><span class='op'>$</span><span class='va'>flipper_length_mm</span> <span class='op'>-</span> <span class='op'>(</span><span class='va'>beta_0</span> <span class='op'>+</span> <span class='va'>beta_1</span><span class='op'>*</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>residuals</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-19-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ul>
+<li>This looks a little skewed to the left. This one is not so bad.</li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li><p><span class="math inline">\(\sum^{n}_{i = 1} {e_i} = ?\)</span></p>
+<ul>
+<li><span class="math inline">\(\sum^{n}_{i = 1} {e_i} = 0\)</span></li>
+<li>Even though it is a little skewed, if we sum up all the residuals, they will equal zero.</li>
+</ul></li>
+<li><p><span class="math inline">\(\sum^{n}_{i = 1} {e_i^2} = ?\)</span></p>
+<ul>
+<li>It’s a minimum (it’s the same as Q)</li>
+</ul></li>
+<li><p><span class="math inline">\(\sum{Y_i} = \sum{\hat{Y}}\)</span></p>
+<ul>
+<li>The sum of all observed Ys is the same as sum of all of the predicted values, because sum of residuals = 0</li>
+</ul></li>
+<li><p><span class="math inline">\(\sum{X_ie_i} = 0\)</span></p></li>
+<li><p><span class="math inline">\(\sum{\hat{Y_i}e_i} = 0\)</span></p></li>
+<li><p>The regression line will always go through <span class="math inline">\((\bar{X}, \bar{Y})\)</span></p></li>
+<li><p>If you recenter the X’s, then that <span class="math inline">\(\bar{x}\)</span> will be zero. Then <span class="math inline">\(beta_0\)</span> is your average Y</p></li>
+</ul>
+<h2 id="estimation-of-sigma2-sample-variance">Estimation of <span class="math inline">\(\sigma^2\)</span> | Sample Variance</h2>
+<ul>
+<li>The true variance (or unknown variance) is <span class="math inline">\(\sigma^2\)</span>, estimate it with <span class="math inline">\(\hat{\sigma}^2\)</span></li>
+</ul>
+<p><span class="math display">\[
+\hat{\sigma}^2 = \frac{\sum^n_{i=1}{(Y_i - \bar{Y})^2}}{n - 1}
+\]</span></p>
+<p>Why <span class="math inline">\(n-1\)</span>?</p>
+<ul>
+<li>Because we’re estimating the mean. It’s another way of thinking the amount freedom, degrees of freedom in our estimate. What we do is we use 1 degree of freedom when estimating so we have to subtract it.</li>
+</ul>
+<h2 id="estimation-of-sigma2">Estimation of <span class="math inline">\(\sigma^2\)</span></h2>
+<ul>
+<li><p>Error sum of squares <span class="math display">\[
+SSE = \sum^n_{i = 1}(Y_i - \hat{Y_i})^2 \\
+\]</span></p></li>
+<li><p>Error mean square</p></li>
+<li><p>It’s n-2 because we’re estimating <span class="math inline">\(beta_0\)</span> and <span class="math inline">\(beta_1\)</span> in <span class="math inline">\(\hat{Y}\)</span>. This will change with more parameters</p></li>
+</ul>
+<p><span class="math display">\[
+\hat{\sigma}^2  = MSE = \frac{SSE}{n-2}
+\]</span></p>
+<ul>
+<li>Expected value of MSE is unbiased, equaling the true variance</li>
+</ul>
+<p><span class="math display">\[
+E\{MSE\} = \sigma^2
+\]</span></p>
+<h2 id="estimation-of-sigma2-1">Estimation of <span class="math inline">\(\sigma^2\)</span></h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>sse</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>residuals</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>mse</span> <span class='op'>&lt;-</span> <span class='va'>sse</span><span class='op'>/</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>residuals</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>mse</span>
+</code></pre>
+</div>
+<pre><code>[1] 46.87621</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>mse</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 6.84662</code></pre>
+</div>
+<ul>
+<li>If we got more data, the variance of our estimate should go down and MSE would decrease.</li>
+</ul>
+<h1 id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h1>
+<h2 id="motivation">Motivation</h2>
+<ul>
+<li>No matter what may be the form of the distribution of the error terms, the least squares method provides unbiased point estimators of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that have minimum variance among all unbiased linear estimators.</li>
+<li>To set up interval estimates and make tests, however, we need to make an assumption about the form of the distribution of the error terms.</li>
+</ul>
+<h2 id="set-up">Set Up</h2>
+<ul>
+<li>How to define the mean/standard deviation</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>250</span>, <span class='fl'>265</span>, <span class='fl'>259</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Is it more likely to come from <code>normal(230, 10)</code> or <code>normal(260, 5)</code> [normal distribution, with mean of and standard deviation of]?</p>
+<ul>
+<li>It would be 260 one because its closer to the actual values</li>
+</ul>
+<h2 id="set-up-visualization">Set Up | Visualization</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Created 10000 random draws from those two distributions</span>
+<span class='va'>op_1_sample</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>230</span>, <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>op_2_sample</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>260</span>, <span class='fl'>5</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Make a histogram of it with the three points</span>
+<span class='va'>samp_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>samp <span class='op'>=</span> <span class='va'>op_1_sample</span>,
+             dist <span class='op'>=</span> <span class='st'>"normal(230, 10)"</span><span class='op'>)</span>,
+   <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>samp <span class='op'>=</span> <span class='va'>op_2_sample</span>,
+             dist <span class='op'>=</span> <span class='st'>"normal(260, 5)"</span><span class='op'>)</span>
+<span class='op'>)</span> 
+
+<span class='va'>samp_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>samp</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_density.html'>geom_density</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>dist</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>samp <span class='op'>=</span> <span class='va'>X</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fl'>0</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-23-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ul>
+<li>It seems that those three points are more likely to come from the distribution on the right.</li>
+</ul>
+<h2 id="sampling-vs-density-function">Sampling vs Density Function</h2>
+<p><span class="math display">\[
+L(\mu, \sigma | x) =
+\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]</span></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>raw_norm_eq</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>mu</span>, <span class='va'>sigma</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fl'>1</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>*</span><span class='va'>sigma</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='op'>(</span><span class='va'>x</span><span class='op'>-</span><span class='va'>mu</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>sigma</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='fu'>raw_norm_eq</span><span class='op'>(</span><span class='fl'>210</span><span class='op'>:</span><span class='fl'>260</span>, mu <span class='op'>=</span> <span class='fl'>230</span>, sigma <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+          <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span><span class='op'>(</span><span class='fl'>210</span><span class='op'>:</span><span class='fl'>260</span>, mean <span class='op'>=</span> <span class='fl'>230</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<h2 id="likelihood-calculation">Likelihood Calculation</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>lh</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>,
+           opt_1_l <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span><span class='op'>(</span><span class='va'>X</span>, mean <span class='op'>=</span> <span class='fl'>230</span>, <span class='fl'>10</span><span class='op'>)</span>, 
+           opt_2_l <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span><span class='op'>(</span><span class='va'>X</span>, mean <span class='op'>=</span> <span class='fl'>260</span>, sd <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>$</span><span class='va'>opt_1_l</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2.804654e-10</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>$</span><span class='va'>opt_2_l</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 4.086938e-05</code></pre>
+</div>
+<ul>
+<li><p>The second one is larger, meaning that it is more likely that the points came from the second distribution.</p></li>
+<li><p>The likelihood calculation depends on how well the data fits. The total likelihood can go down when you have more data, because when you multiply a # less than 1 with another # less than 1 it becomes even smaller. That’s why when your comparing it, you need to have the same amount of data in both.</p></li>
+<li><p>The likelihood is not the probability. The probability of any 1 piece of data is zero. In order to get the probability, you have to integrate over sections of density functions.</p></li>
+</ul>
+<h2 id="logliklihood-calculation">LogLiklihood Calculation</h2>
+<ul>
+<li>Multiplying ever smaller numbers becomes a problem for the computer so we often work with the loglikelihood</li>
+<li>So what you end up doing is loglikelihood</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>$</span><span class='va'>opt_1_l</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -21.99457</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>lh</span><span class='op'>$</span><span class='va'>opt_2_l</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] -10.10513</code></pre>
+</div>
+<ul>
+<li>The log is to the base e</li>
+<li>If you have a high loglikelihood, you’re closer to zero, you’ll also have a higher likelihood</li>
+</ul>
+<h2 id="finding-optimal-points">Finding Optimal Points</h2>
+<ul>
+<li>Keep sigma constant at 10</li>
+<li>Calculating log likelihood for different values of the mean</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>210</span><span class='op'>:</span><span class='fl'>300</span>, 
+            sd <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>LL <span class='op'>=</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>map2_dbl</a></span><span class='op'>(</span><span class='va'>mean</span>, <span class='va'>sd</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>dnorm</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>.x</span>, <span class='va'>.y</span>, log <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>mean</span>, y <span class='op'>=</span> <span class='va'>LL</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="Class-01-Ordinary-Linear-Regression_files/figure-html5/unnamed-chunk-28-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ul>
+<li>The most likely value is at the top of the curve, at mean 260</li>
+<li>This is a formal way of judging if data are likely to come from a distribution</li>
+<li>We would have a better understanding of what the true mean of the data was the pointer, steeper, this graph is.</li>
+<li>For this graph it’s a little flat at the top, the mean has a range of 250-262. but if it was pointy, it’ll be an exact true mean</li>
+</ul>
+<h2 id="application-to-regression">Application to regression</h2>
+<p><span class="math display">\[
+\begin{aligned}
+L(\mu, \sigma | x) &amp; = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
+\mu &amp; = \beta_0 + \beta_1X_i, x = Y_i \\
+L(\beta_0, \beta_1, \sigma | X, Y) &amp; = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(Y_i - \beta_0 - \beta_1X_i)^2}{2\sigma^2}} 
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Likelihood in terms of regression</li>
+<li>We want to define <span class="math inline">\(\mu_0\)</span></li>
+<li>From the first eq, we’re going to substitute our expectation of Y from the regression equation into <span class="math inline">\(\mu_0\)</span> and the actual value is Yi and so that’s the difference there.</li>
+<li>That means we can test the likelihood of those 3 parameters given the data that we’re seeing.</li>
+<li>On third equation, the likelihood of <span class="math inline">\(beta_0, beta_1, sigma\)</span> (these 3 estimates we’ve been estimating using the method of least squares previously) given the observed data <span class="math inline">\(X_i, Y_i\)</span> is given =</li>
+<li>we want to define <span class="math inline">\(\mu_0\)</span> by subbing a different equation for the mean</li>
+<li>What we’re saying is that the data and in fact the residual, error term, comes from a normal distribution. The normal distribution is defined by the first equation. What combination of these 3 parameters gives me the highest likelihood given the data. This is what max likelihood estimation is, and its important because the least squares method can only get us so far.</li>
+<li>To take us to different types and to generalize the linear model, we would need to use the max likelihood estimation. And leverage that because we can look at lots of different distributions that way and that’s how we can expand our repertoire of possible regressions</li>
+</ul>
+<p>For <em>n</em> points:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L(\beta_0, \beta_1, \sigma) &amp; = \prod^{n}_{i=1}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(Y_i - \beta_0 - \beta_1X_i)^2}{2\sigma^2}} \\
+\end{aligned}
+\]</span></p>
+<h2 id="solving-the-parameters">Solving the parameters</h2>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are estimated the same as with least squares</li>
+<li>Here we are making assumptions about the distribution of the error terms. This is not an unbiased estimate of <span class="math inline">\(\hat{\sigma}^2\)</span></li>
+<li>This is biased</li>
+<li>Unbiased estimates may not exist in more complicated regressions</li>
+</ul>
+<p><span class="math display">\[
+\hat{\sigma}^2 = \frac{\sum{(Y_i - \hat{Y_i})^2}}{n}
+\]</span></p>
+<h1 id="on-centering">On Centering</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g_cent</span> <span class='op'>&lt;-</span> <span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>peng</span><span class='op'>$</span><span class='va'>body_mass_g_cent</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Min.</th>
+<th style="text-align: right;">1st Qu.</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">3rd Qu.</th>
+<th style="text-align: right;">Max.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+| -1507.057| -657.0571| -157.0571| 0| 567.9429| 2092.943|
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#compare</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>flipper_length_mm</span> <span class='op'>~</span> <span class='va'>body_mass_g</span> <span class='op'>+</span> <span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>peng</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = flipper_length_mm ~ body_mass_g + 1, data = peng)
+
+Coefficients:
+(Intercept)  body_mass_g  
+   137.0396       0.0152  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>flipper_length_mm</span> <span class='op'>~</span> <span class='va'>body_mass_g_cent</span> <span class='op'>+</span> <span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>peng</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = flipper_length_mm ~ body_mass_g_cent + 1, data = peng)
+
+Coefficients:
+     (Intercept)  body_mass_g_cent  
+        200.9670            0.0152  </code></pre>
+</div>
+<ul>
+<li><p>This is how to center. The mean is zero</p></li>
+<li><p>This means that instead of running the regression with the original variable, we’re going to run it with the cent one.</p></li>
+<li><p>In the liner modal formula, the left side is your response variable and the right side is your independent variable. It automatically adds an intercept, but you can do it by hand as well. the far right is where you specify the data</p></li>
+<li><p>The estimate for <span class="math inline">\(beta_1\)</span>, 0.0152, doesn’t change but the intercept changes and the interpretation of it changes. When X is zero for the first one, that’s the flipper length of a zero mass penguin. When X is zero for the second, that’s the flipper length for an average size penguin, because we moved the mean to 0 by subtracted it from the original formula.</p></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="disqus-comments">
+      <i class="fas fa-comments"></i>
+      &nbsp;
+      <span class="disqus-comment-count" data-disqus-identifier="posts/notes/">Comment on this article</span>
+    </span>
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Class%2001%20-%20Ordinary%20Linear%20Regression&amp;url=https%3A%2F%2Fbeta.rstudioconnect.com%2Fcontent%2F3776%2Fposts%2Fnotes%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fbeta.rstudioconnect.com%2Fcontent%2F3776%2Fposts%2Fnotes%2F&amp;title=Class%2001%20-%20Ordinary%20Linear%20Regression">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+  <script id="dsq-count-scr" src="https://reproducible-finance-with-r.disqus.com/count.js" async></script>
+  <div id="disqus_thread" class="hidden"></div>
+  <script type="text/javascript" cookie-consent="functionality">
+var disqus_config = function () {
+  this.page.url = 'https://beta.rstudioconnect.com/content/3776/posts/notes/';
+  this.page.identifier = 'posts/notes/';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://reproducible-finance-with-r.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+  <p>
+    <div class="subscribe">
+<form method='post' action='https://blogtrottr.com'>
+  <p>Enjoy this blog? Get notified of new posts via email:</p>
+  <input type='text' name='btr_email' />
+  <input type='hidden' name='btr_url'
+         value='https://beta.rstudioconnect.com/content/3776/index.xml'/>
+  <input type='hidden' name='schedule_type' value='0' />
+  <input type='submit' value='Subscribe' />
+</form>
+</div>
+  </p>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="reuse">Reuse</h3>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">Chittumuri (2021, March 3). Reproducible Finance with R: Class 01 - Ordinary Linear Regression. Retrieved from https://beta.rstudioconnect.com/content/3776/posts/notes/</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{chittumuri2021class,
+  author = {Chittumuri, Isabella},
+  title = {Reproducible Finance with R: Class 01 - Ordinary Linear Regression},
+  url = {https://beta.rstudioconnect.com/content/3776/posts/notes/},
+  year = {2021}
+}</pre>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
